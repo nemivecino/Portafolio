@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comedor 🍴 </title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="estilo.css">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/jpg" href="comedo.png">
+    <style>
+        dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+            padding: 1.5rem;
+            max-width: 800px;
+            width: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: white;
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.8);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        dialog[open] {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        dialog.closing {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.8);
+        }
+
+        dialog::backdrop {
+            background: rgba(0,0,0,0.5);
+        }
+
+        #open-dialog {
+            margin: 20px auto;
+            display: block;
+            padding: 0.8rem 1rem;
+            background-color: #1d72b8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        #open-dialog:hover {
+            background-color: #155d8b;
+        }
+
+        #close-dialog {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        #close-dialog:hover {
+            background-color: #b43428;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 1rem;
+        }
+        table {
+            table-layout: fixed;
+            width: 100%;
+            border-collapse: collapse;
+            width: 100%;
+            min-width: 700px; /* wider to accommodate all columns */
+            font-size: 0.9rem;
+        }
+        th, td {
+            border: 2px solid #2c3e50;
+            padding: 0.5rem 1rem;
+            text-align: center ;
+            vertical-align: top;
+        }
+        th {
+            background-color: #b2c8df;
+            font-weight: 700;
+        }
+        tbody tr:hover {
+            background-color: #e2dec5;
+        }
+        td strong {
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+        /* Responsive for small screens */
+        @media (max-width: 640px) {
+            dialog {
+                width: 95vw;
+            }
+        }
+        img{
+            overflow-clip-margin: content-box;
+            overflow: clip;
+        }
+
+    </style>
+</head>
+<body>
+    <form method="post">
+
+    <h1>¡Regístrate para el comedor!🍛</h1>
+        <input type="text" name="name" placeholder="Nombre completo" required>
+        <input type="email" name="email" placeholder="Email" required>
+        
+
+        <div>
+            <select name="curso" id="curso" required>
+                <option value="" disabled selected>Selecciona tu curso</option> 
+                <option value="1 A">1°A</option>
+                <option value="1 B">1°B</option>
+                <option value="1 C">1°C</option>
+                <option value="1 D">1°D</option>
+                <option value="2 A">2°A</option>
+                <option value="2 B">2°B</option>
+                <option value="2 C">2°C</option>
+                <option value="3 A">3°A</option>
+                <option value="3 B">3°B</option>
+                <option value="3 C">3°C</option>
+                <option value="4 A">4°A</option>
+                <option value="4 B">4°B</option>
+                <option value="4 C">4°C</option>
+                <option value="5 A">5°A</option>
+                <option value="5 B">5°B</option>
+                <option value="5 C">5°C</option>
+                <option value="6 A">6°A</option>
+                <option value="6 B">6°B</option>
+                <option value="6 C">6°C</option>
+            </select>
+        </div>
+
+        <div>
+            <select name="turno" id="turno" required>
+                <option value="" disabled selected>Selecciona tu turno</option>
+                <option value="11:50hs">11:50hs</option>
+                <option value="13:00Hs">13:00HS</option>
+            </select>
+        </div>
+        <button type="button" id="open-dialog">¡Mirá los horarios!</button>
+        <input type="submit" name="register" value="Enviar">
+        <?php include("registrar.php"); ?>
+
+    <dialog id="dialog">
+        <h2>Horarios del comedor 🍝 </h2>
+        <p>Distribución de cursos por día y turno</p>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Turno</th>
+                        <th>Lunes</th>
+                        <th>Martes</th>
+                        <th>Miércoles</th>
+                        <th>Jueves</th>
+                        <th>Viernes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1º</strong></td>
+                        <td>
+                            1A - 1B - 1C <br>
+                            <br>
+                            1D - 2C - 5B <br>
+                            <br>
+                            6A - 6B - 3C <br>
+                        </td>
+                        <td>
+                            1A - 1B - 1C<br>
+                            <br>
+                            1D - 4B - 5A<br>
+                            <br>
+                            5B - 6A - 3C<br>
+                            
+                        </td>
+                        <td>
+                            1A - 1B - 1C <br>
+                            <br>
+                            1D - 3A - 4A <br>
+                            <br>
+                            5B - 6A - 3C <br>
+                            
+                        </td>
+                        <td>
+                            1A - 1B - 1C <br>
+                            <br>
+                            1D - 2C - 5B <br>
+                            <br>
+                            5C - 6A - 3C <br>
+                           
+                        </td>
+                        <td>
+                            1A - 1C - 2A <br>
+                            <br>
+                            2C - 3B - 4A <br>
+                            <br>
+                            4B - 5B - 3C <br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>2º</strong></td>
+                        <td>
+                            
+                            2A - 2B - 3A <br>
+                            <br>
+                            3B - 4A - 4B <br>
+                            <br>
+                            4C - 5A - 5C <br>
+                            6C
+                            
+                        </td>
+                        <td>
+                            2A - 2B - 2C <br>
+                            <br>
+                            3A - 3B - 4A <br>
+                            <br>
+                            4C - 5C - 6B <br>
+                            6C
+                        </td>
+                        <td>
+                            2A - 2B - 2C <br>
+                            <br>
+                            3B - 4B - 4C <br>
+                            <br>
+                            5A - 5C - 6B <br>
+                            6C
+                        </td>
+                        <td>
+                            2A - 2B - 3A <br>
+                            <br>
+                            3B - 4A - 4B <br>
+                            <br>
+                            4C - 5A - 6B <br>
+                            6C
+                        </td>
+                        <td>
+                            1B - 1D - 2B <br>
+                            <br>
+                            3A - 4C - 5A <br>
+                            <br>
+                            5C - 6A - 6B<br>
+                            6C <br>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button id="close-dialog">Cerrar</button>
+    </dialog>
+    </form>
+
+    <script>
+        const dialog = document.getElementById('dialog');
+        const openDialogButton = document.getElementById('open-dialog');
+        const closeDialogButton = document.getElementById('close-dialog');
+
+        openDialogButton.addEventListener('click', () => {
+            dialog.showModal();
+        });
+
+        closeDialogButton.addEventListener('click', () => {
+            dialog.classList.add('closing');
+            setTimeout(() => {
+                dialog.classList.remove('closing');
+                dialog.close();
+            }, 300); // tiempo igual al transition (0.3s)
+        });
+    </script>
+
+</body>
+</html>
