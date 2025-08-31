@@ -1,0 +1,121 @@
+<!--pagina principal del clon de steam-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clon de Steam</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header>
+        <div class="header-container"> 
+            <div class="logo">
+                <img src="https://store.akamai.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016" alt="Steam Logo"> <!--logo de steam-->
+            </div>
+            <nav>
+                <ul> <!--lista del header-->
+                    <li><a href="#">TIENDA</a></li> 
+                    <li><a href="#">COMUNIDAD</a></li>
+                    <li><a href="#">ACERCA DE</a></li>
+                    <li><a href="#">SOPORTE</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="#" class="install-steam">Instalar Steam</a>
+                <a href="steam.html" class="login">iniciar sesión</a>
+                <span class="language-selector"> | idioma ▼</span>
+            </div>
+        </div>
+    </header>
+
+    <main> <!--imagenes de juegos, ofertas etc-->
+        <section class="featured">
+            <div class="featured-content">
+                <h1>OFERTA DESTACADA</h1>
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/578080/capsule_616x353.jpg?t=1715879777" alt="PUBG: BATTLEGROUNDS">
+                <h2>PUBG: BATTLEGROUNDS</h2>
+                <div class="tags">
+                    <span>Supervivencia</span>
+                    <span>Disparos</span>
+                    <span>Multijugador</span>
+                    <span>PvP</span>
+                </div>
+                <p class="price">Gratis</p>
+            </div>
+        </section>
+
+        <section class="special-offers">
+            <h2>OFERTAS ESPECIALES</h2>
+            <div class="offers-grid">
+                <!-- ejemplo de tarjeta de juego -->
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg?t=1714453116" alt="Grand Theft Auto V">
+                    <div class="game-info">
+                        <h3>Grand Theft Auto V</h3>
+                        <div class="discount">
+                            <span class="discount-percentage">-63%</span>
+                            <span class="prices">
+                                <span class="original-price">$29.99</span>
+                                <span class="discounted-price">$11.09</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg?t=1709832282" alt="Cyberpunk 2077">
+                    <div class="game-info">
+                        <h3>Cyberpunk 2077</h3>
+                        <div class="discount">
+                            <span class="discount-percentage">-50%</span>
+                            <span class="prices">
+                                <span class="original-price">$59.99</span>
+                                <span class="discounted-price">$29.99</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                 <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1174180/header.jpg?t=1701368423" alt="Red Dead Redemption 2">
+                    <div class="game-info">
+                        <h3>Red Dead Redemption 2</h3>
+                        <div class="discount">
+                            <span class="discount-percentage">-67%</span>
+                            <span class="prices">
+                                <span class="original-price">$59.99</span>
+                                <span class="discounted-price">$19.79</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                 <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/359550/header.jpg?t=1699290828" alt="Tom Clancy's Rainbow Six Siege">
+                    <div class="game-info">
+                        <h3>Tom Clancy's Rainbow Six® Siege</h3>
+                        <div class="discount">
+                            <span class="discount-percentage">-60%</span>
+                            <span class="prices">
+                                <span class="original-price">$19.99</span>
+                                <span class="discounted-price">$7.99</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer> <!--pie de la pagina-->
+        <div class="footer-container">
+            <p>© 2024 Valve Corporation. Todos los derechos reservados. Todas las marcas registradas pertenecen a sus respectivos dueños en EE. UU. y otros países.</p>
+            <div class="footer-links">
+                <a href="#">Política de Privacidad</a> |
+                <a href="#">Información Legal</a> |
+                <a href="#">Acuerdo de Suscriptor a Steam</a> |
+                <a href="#">Reembolsos</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

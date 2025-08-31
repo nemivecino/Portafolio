@@ -1,0 +1,229 @@
+/* estilo general de la pagina principal */
+body {
+    background-color: #1b2838; /* color de fondo de steam */
+    color: #c7d5e0;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #66c0f4;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ffffff;
+}
+
+/* header */
+header {
+    background-color: #171a21; 
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-container {
+    width: 940px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo img {
+    height: 44px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li a {
+    padding: 15px;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    color: #b8b6b4;
+}
+
+nav ul li a:hover {
+    color: #ffffff;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+
+.install-steam {
+    background-color: #5c7e10;
+    color: #e5e4dc;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin-right: 15px;
+}
+
+.install-steam:hover {
+    background-color: #6b9112;
+    color: #ffffff;
+}
+
+.login {
+    color: #b8b6b4;
+}
+
+.language-selector {
+    color: #b8b6b4;
+    cursor: pointer;
+}
+
+/* contenido Principal */
+main {
+    width: 940px;
+    margin: 20px auto;
+}
+
+h1, h2 {
+    color: #ffffff;
+    font-weight: normal;
+    border-bottom: 1px solid #2a475e;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+/* Sección Destacada */
+.featured {
+    background-color: #0f1922;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.featured-content img {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.featured-content h2 {
+    border: none;
+    margin: 0;
+    font-size: 24px;
+}
+
+.tags {
+    margin: 10px 0;
+}
+
+.tags span {
+    background-color: #2a475e;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.price {
+    font-size: 18px;
+    color: #a3cf06;
+    font-weight: bold;
+}
+
+/* Ofertas Especiales */
+.special-offers h2 {
+    margin-bottom: 20px;
+}
+
+.offers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.game-card {
+    background-color: #0f1922;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-card img {
+    width: 100%;
+}
+
+.game-card .game-info {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.game-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    color: #c7d5e0;
+}
+
+.discount {
+    background-color: #4c6b22;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.discount-percentage {
+    font-size: 24px;
+    font-weight: bold;
+    color: #a3cf06;
+}
+
+.prices {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #738895;
+    font-size: 12px;
+}
+
+.discounted-price {
+    color: #a3cf06;
+    font-size: 14px;
+}
+
+/* Footer */
+footer {
+    background-color: #171a21;
+    padding: 30px 0;
+    margin-top: 50px;
+    font-size: 12px;
+    color: #8f98a0;
+}
+
+.footer-container {
+    width: 940px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-links {
+    margin-top: 10px;
+}
+
+.footer-links a {
+    color: #c6d4df;
+    margin: 0 10px;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+}

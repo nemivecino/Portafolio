@@ -1,0 +1,122 @@
+body {
+    background-color: #181a21;
+    color: #c7d5e0;
+    font-family: 'Motiva Sans', 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.page-container {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-header {
+    margin-bottom: 30px;
+}
+
+.login-header img {
+    width: 180px;
+}
+
+.login-main {
+    width: 100%;
+}
+
+.login-form-container {
+    width: 100%;
+}
+
+.login-form-container h1 {
+    font-size: 32px;
+    color: #ffffff;
+    font-weight: 200;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    color: #afafaf;
+    font-size: 14px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    background-color: #32353c;
+    border: 1px solid #32353c;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #5a9cff;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 15px;
+    border-radius: 3px;
+    border: none;
+    background: linear-gradient(to right, #00aaff, #006eff);
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+
+.btn-login:hover {
+    background: linear-gradient(to right, #00bfff, #007fff);
+}
+
+.help-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #b0b0b0;
+    font-size: 14px;
+}
+
+.join-steam-container {
+    margin-top: 50px;
+    text-align: center;
+    border-top: 1px solid #363c44;
+    padding-top: 30px;
+}
+
+.join-steam-container h2 {
+    color: #b0b0b0;
+    font-weight: normal;
+}
+
+.btn-join {
+    display: inline-block;
+    padding: 12px 25px;
+    border: 1px solid #c7d5e0;
+    border-radius: 3px;
+    color: #c7d5e0;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
