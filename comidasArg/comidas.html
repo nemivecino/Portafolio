@@ -13,23 +13,33 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
+      padding: 20px;
+      min-height: 100vh;
     }
+
     h1 {
       margin-bottom: 20px;
+      text-align: center;
+      font-size: 1.5rem;
     }
+
     #arena {
       display: flex;
+      flex-wrap: wrap; /* permite que los elementos se ajusten en pantallas pequeñas */
       align-items: center;
-      gap: 20px;
+      justify-content: center;
+      gap: 15px;
+      width: 100%;
+      max-width: 600px;
     }
+
     .card {
       background: #222;
       border-radius: 15px;
       box-shadow: 0 6px 15px rgba(0,0,0,0.6);
-      width: 220px;
-      height: 320px;
+      width: 45%; /* ocupa menos del 50% para que quepan en fila en pantallas pequeñas */
+      max-width: 220px;
+      height: auto;
       overflow: hidden;
       cursor: pointer;
       display: flex;
@@ -37,30 +47,60 @@
       align-items: center;
       transition: transform 0.2s;
     }
+
     .card:hover {
       transform: scale(1.05);
     }
+
     .card img {
       width: 100%;
-      height: 75%;
+      height: auto;
       object-fit: cover;
     }
+
     .card h2 {
       margin: 8px 0;
-      font-size: 18px;
-    }
-    .vs {
-      font-size: 32px;
-      font-weight: bold;
-      color: #ffcc00;
-    }
-    #final {
+      font-size: 1rem;
       text-align: center;
     }
+
+    .vs {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ffcc00;
+      text-align: center;
+      width: 100%;
+    }
+
+    #final {
+      text-align: center;
+      margin-top: 20px;
+    }
+
     #final img {
-      width: 260px;
+      width: 90%;
+      max-width: 260px;
       border-radius: 15px;
       margin-top: 15px;
+    }
+
+    /* Media queries para móviles */
+    @media (max-width: 480px) {
+      .card {
+        width: 100%;
+      }
+
+      .vs {
+        font-size: 1.2rem;
+      }
+
+      h1 {
+        font-size: 1.2rem;
+      }
+
+      .card h2 {
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
