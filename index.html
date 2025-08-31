@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portafolio – Nehemias Vecino</title>
+  <meta name="description" content="Portafolio de proyectos de desarrollo web." />
+  <link rel="icon" href="favicon.ico" />
+  <style>
+    :root{
+      --bg:#0b1a3d;
+      --panel:#151933;
+      --ink:#e6e8ef;
+      --muted:#9aa3b2;
+      --brand:#6ee7f3;
+      --brand-2:#a78bfa;
+      --ok:#34d399;
+      --radius:18px;
+      --shadow:0 10px 30px rgba(0,0,0,.25);
+      --max:1080px;
+    }
+    *{box-sizing:border-box}
+    html, body{
+      height:100%;
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Inter,Arial,sans-serif;
+      color:var(--ink);
+      background: var(--bg);
+      line-height:1.5;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .wrap{max-width:var(--max);margin-inline:auto;padding:24px}
+    header{position:sticky;top:0;backdrop-filter:saturate(180%) blur(8px); background:rgba(15,18,32,.6); border-bottom:1px solid rgba(255,255,255,.06); z-index:10}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.5px}
+    .brand .dot{width:10px;height:10px;border-radius:99px;background:linear-gradient(135deg,var(--brand),var(--brand-2))}
+    .menu{display:flex;gap:18px;align-items:center}
+    .menu a{padding:8px 10px;border-radius:10px;color:var(--muted)}
+    .menu a:hover{color:var(--ink);background:rgba(255,255,255,.06)}
+    .cta{padding:10px 14px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#0a0f1f;font-weight:700}
+    .hero{padding:48px 24px 24px}
+    .hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+    .title{font-size:clamp(28px,4vw,44px);line-height:1.1;margin:0 0 10px}
+    .lead{color:var(--muted);max-width:60ch;margin:0 0 24px}
+    .badge{display:inline-flex;gap:8px;align-items:center;background:rgba(110,231,243,.12);border:1px solid rgba(110,231,243,.35);color:var(--brand);padding:6px 10px;border-radius:999px;font-size:14px;margin-bottom:12px}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);opacity:0;transform:translateY(30px);transition: all 0.6s ease-out;}
+    .hero-card.visible{opacity:1;transform:translateY(0);}
+    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .tag{font-size:12px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);color:var(--muted)}
+    section{padding:40px 24px;opacity:0;transform:translateY(30px);transition:all 0.6s ease-out;}
+    section.visible{opacity:1;transform:translateY(0);}
+    h2{font-size:clamp(22px,3vw,28px);margin:0 0 14px}
+    .muted{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .card{background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;opacity:0;transform:translateY(30px);transition:all 0.6s ease-out}
+    .card.visible{opacity:1;transform:translateY(0);}
+    .thumb{aspect-ratio:16/9;background:linear-gradient(135deg,rgba(110,231,243,.15),rgba(167,139,250,.15));border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,.6);cursor:pointer}
+    .card-body{padding:16px;display:flex;flex-direction:column;gap:10px}
+    .card h3{margin:0;font-size:18px}
+    .meta{display:flex;gap:8px;flex-wrap:wrap}
+    .chip{font-size:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);padding:5px 8px;border-radius:999px;color:var(--muted)}
+    .card a.btn{margin-top:auto;display:inline-flex;justify-content:center;align-items:center;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.10)}
+    .card a.btn:hover{background:rgba(255,255,255,.06)}
+    .about{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .bullet{display:flex;gap:10px;align-items:flex-start}
+    .dot-ok{width:9px;height:9px;border-radius:99px;background:var(--ok);margin-top:7px}
+    footer{padding:40px 24px;color:var(--muted);border-top:1px solid rgba(255,255,255,.06)}
+    @media (max-width: 900px){.hero .wrap{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.about{grid-template-columns:1fr}}
+    @media (max-width: 560px){.grid{grid-template-columns:1fr}.menu{display:none}}
+
+    /* Modal imágenes */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn .3s ease;
+    }
+    .modal-content {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      transform: scale(0.8);
+      animation: zoomIn .3s forwards;
+    }
+    .modal .close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      font-size: 40px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+    }
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+    @keyframes zoomIn { to {transform: scale(1);} }
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#inicio"><span class="dot"></span> <span>Nehemias Vecino</span></a>
+    <nav class="menu">
+      <a href="#proyectos">Proyectos</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a class="cta" href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div>
+      <div class="badge">HTML & CSS</div>
+      <h1 class="title">Desarrollo web simple y claro</h1>
+      <p class="lead">Enseño fundamentos de <strong>HTML5</strong> y <strong>CSS3</strong> con proyectos prácticos. Maquetación, estilos, y sitios responsivos para empezar a crear desde el día uno.</p>
+      <div class="tags">
+        <span class="tag">HTML5</span>
+        <span class="tag">CSS3</span>
+        <span class="tag">Responsive</span>
+        <span class="tag">Accesibilidad</span>
+      </div>
+    </div>
+</section>
+
+<section id="proyectos">
+  <div class="wrap">
+    <h2>Proyectos</h2>
+    <p class="muted">Selección breve. Cada tarjeta tiene descripción corta, tecnologías, y enlaces.</p>
+    <div class="grid">
+      <!-- Comedor escolar -->
+      <article class="card">
+        <div class="thumb" style="background-image: url('img/comedorimagen.png');background-size: cover;background-position: center;"></div>
+        <div class="card-body">
+          <h3>Comedor escolar</h3>
+          <p class="muted">Sitio para gestión básica y visualización. Maquetado con HTML y CSS. (Agregar si tiene backend)</p>
+          <div class="meta">
+            <span class="chip">HTML</span>
+            <span class="chip">CSS</span>
+            <span class="chip">PHP</span>
+            <span class="chip">MySQL</span>
+            <span class="chip">Responsive</span>
+          </div>
+          <div class="meta">
+            <a class="btn" href="comedor/index.html" target="_blank" rel="noopener">Ver</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Freatímetro digital -->
+      <article class="card">
+        <div class="thumb" style="background-image: url('img/freatimetroimagen.png');background-size: cover;background-position: center;"></div>
+        <div class="card-body">
+          <h3>Freatímetro digital</h3>
+          <p class="muted">Lectura de nivel freático y publicación de datos. Página de visualización con estilos limpios.</p>
+          <div class="meta">
+            <span class="chip">HTML</span>
+            <span class="chip">CSS</span>
+            <span class="chip">IoT</span>
+          </div>
+          <div class="meta">
+            <a class="btn" href="freatimetro.html" target="_blank" rel="noopener">Ver</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Quizzes interactivos -->
+      <article class="card">
+        <div class="thumb" style="background-image: url('img/comidas.png');background-size: cover;background-position: center;"></div>
+        <div class="card-body">
+          <h3>Quizzes interactivos</h3>
+          <p class="muted">Pequeños ejercicios de preguntas y respuestas. Enfoque en maquetación y estilos.</p>
+          <div class="meta">
+            <span class="chip">HTML</span>
+            <span class="chip">CSS</span>
+          </div>
+          <div class="meta">
+            <a class="btn" href="comidasArg/comidas.html" target="_blank" rel="noopener">Ver</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Clon Steam -->
+      <article class="card">
+        <div class="thumb" style="background-image: url('img/steamimagenpng.png');background-size: cover;background-position: center;"></div>
+        <div class="card-body">
+          <h3>Clon Steam</h3>
+          <p class="muted">Réplicas de páginas populares para practicar maquetación, tipografía y spacing.</p>
+          <div class="meta">
+            <span class="chip">HTML</span>
+            <span class="chip">CSS</span>
+            <span class="chip">Grid/Flex</span>
+          </div>
+          <div class="meta">
+            <a class="btn" href="steam/principal.html" target="_blank" rel="noopener">Ver</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<section id="sobre-mi">
+  <div class="wrap about">
+    <div>
+      <h2>Sobre mí</h2>
+      <p class="muted">Desarrollador web con foco en HTML y CSS para nivel inicial. Me interesa crear ejercicios simples y visuales que ayuden a entender estructura y estilos sin complejidad innecesaria.</p>
+      <div class="bullet"><span class="dot-ok"></span><p>Buenas prácticas: semántica, accesibilidad, responsive.</p></div>
+      <div class="bullet"><span class="dot-ok"></span><p>Documentación clara y ejemplos reproducibles.</p></div>
+    </div>
+    <div class="hero-card">
+      <strong>Skills</strong>
+      <div class="tags">
+        <span class="tag">HTML5</span>
+        <span class="tag">CSS3</span>
+        <span class="tag">Flexbox</span>
+        <span class="tag">Grid</span>
+      </div>
+      <strong style="display:block;margin-top:12px">Otros</strong>
+      <div class="tags">
+        <span class="tag">JavaScript</span>
+        <span class="tag">PHP</span>
+        <span class="tag">MySQL</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <h2>Contactame</h2>
+    <p class="muted">Podés escribirme por mis redes.</p>
+    <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+      <a href="https://github.com/nemivecino" target="_blank" rel="noopener" aria-label="GitHub"
+         style="display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink)">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"
+             style="width:32px;height:32px"> GitHub
+      </a>
+
+      <a href="https://instagram.com/_nemi_07" target="_blank" rel="noopener" aria-label="Instagram"
+         style="display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink)">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"
+             style="width:32px;height:32px"> Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <span>© <span id="y"></span> Nehemias Vecino</span>
+
+<!-- Modal -->
+<div id="imageModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modalImg">
+</div>
+
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        if(entry.target.classList.contains('card')){
+          const cards = Array.from(entry.target.parentNode.children);
+          cards.forEach((card, i) => {
+            setTimeout(() => card.classList.add('visible'), i * 150);
+          });
+        } else {
+          entry.target.classList.add('visible');
+        }
+      }
+    });
+  }, {threshold: 0.1});
+
+  document.querySelectorAll('section, .card, .hero-card').forEach(el => observer.observe(el));
+
+  // Modal imágenes
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("modalImg");
+  const closeBtn = modal.querySelector(".close");
+
+  document.querySelectorAll(".thumb").forEach(thumb => {
+    thumb.addEventListener("click", () => {
+      const bg = thumb.style.backgroundImage;
+      if(bg && bg !== "none"){
+        const url = bg.slice(5, -2);
+        modal.style.display = "flex";
+        modalImg.src = url;
+      }
+    });
+  });
+
+  closeBtn.onclick = () => modal.style.display = "none";
+  modal.onclick = e => { if(e.target === modal) modal.style.display = "none"; };
+</script>
+</body>
+</html>
