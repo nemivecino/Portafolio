@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Freatímetro Digital</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    * {margin:0;padding:0;box-sizing:border-box;}
+
+    body,html {
+      font-family:'Poppins',sans-serif;
+      color:white;
+      background:#0e0e0e;
+    }
+
+    header {
+      background:#0a5e2a;
+      padding:15px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    header h1 {font-size:1.6em;}
+    .subtitulo {margin-left:10px;color:#ccffcc;text-decoration:none;font-weight:500;}
+
+    .hero {
+      position:relative;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      overflow:hidden;
+    }
+
+    .hero-bg {
+      position:absolute;width:100%;height:100%;object-fit:cover;z-index:0;
+      filter:blur(4px) brightness(0.5);
+    }
+
+    .overlay {
+      position:absolute;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.4);z-index:1;
+    }
+
+    .hero-content {
+      position:relative;z-index:2;max-width:800px;padding:20px;
+      animation:fadeIn 1.5s ease-in-out;
+    }
+
+    .hero-content h2 {font-size:2.8em;color:#00ffa0;}
+    .hero-content p {font-size:1.2em;margin:20px 0 30px;}
+
+    .buttons {display:flex;flex-direction:column;align-items:center;gap:20px;}
+    .localidades-buttons {display:flex;flex-wrap:wrap;gap:15px;justify-content:center;}
+
+    .btn {
+      background:#00a76f;padding:12px 20px;border-radius:25px;
+      text-decoration:none;color:white;font-weight:bold;
+      transition:all 0.3s ease;
+    }
+    .btn:hover {background:rgba(255,255,255,0.2);border:1px solid white;}
+
+    section.galeria {background:#111;padding:60px 20px;text-align:center;}
+    .galeria h2 {font-size:2.5em;color:#00ffa0;margin-bottom:40px;}
+    .slider {width:90%;margin:auto;display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}
+    .slider img {width:100%;max-width:250px;height:200px;object-fit:cover;border-radius:10px;transition:transform 0.3s;}
+    .slider img:hover {transform:scale(1.05);}
+
+    footer {background:#0a0a0a;color:white;padding:40px 20px;text-align:center;font-size:0.9em;}
+
+    @keyframes fadeIn {
+      from{opacity:0;transform:translateY(20px);}
+      to{opacity:1;transform:translateY(0);}
+    }
+
+    /* Responsive */
+    @media (max-width:1024px){
+      .hero-content h2{font-size:2.2em;}
+      .hero-content p{font-size:1.1em;}
+      .slider img{height:170px;}
+    }
+
+    @media (max-width:768px){
+      header{flex-direction:column;align-items:flex-start;}
+      header h1{font-size:1.4em;}
+      .subtitulo{display:block;margin:5px 0 0 0;}
+      .hero-content h2{font-size:1.8em;}
+      .hero-content p{font-size:1em;}
+      .slider img{height:150px;}
+    }
+
+    @media (max-width:480px){
+      header{align-items:center;text-align:center;}
+      .hero-content h2{font-size:1.5em;}
+      .hero-content p{font-size:0.9em;}
+      .localidades-buttons{flex-direction:column;gap:10px;width:100%;}
+      .btn{width:100%;text-align:center;}
+      .slider img{height:120px;}
+      footer{font-size:0.8em;}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>FREATÍMETRO DIGITAL
+    <a class="subtitulo" href="frearimetro.html">- Principal</a>
+    <a class="subtitulo" href="#fotos-freatimetro">- Fotos</a>
+    <a class="subtitulo" href="mapa.html">- Mapa</a>
+  </h1>
+</header>
+
+<main>
+  <div class="hero">
+    <img src="slider1.jpg" alt="" class="hero-bg">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h2>Bienvenido a la Red de Freatímetros</h2>
+      <p>Monitoreá los niveles de la napa por localidad</p>
+      <div class="buttons">
+        <div class="localidades-buttons">
+          <a href="cadret.html" class="btn">Cadret</a>
+          <a href="hortensia.html" class="btn">Hortensia</a>
+          <a href="moctezuma.html" class="btn">Moctezuma</a>
+          <a href="smith.html" class="btn">Smith</a>
+        </div>
+        <a href="mapa.html" class="btn">Mapa de la zona</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<section class="galeria" id="fotos-freatimetro">
+  <h2>Imágenes del Freatímetro</h2>
+  <div class="slider">
+    <div><img src="img/slider6.jpg" alt="Pozo en Cadret"></div>
+    <div><img src="img/slider3.jpg" alt="Hortensia - Instalación"></div>
+    <div><img src="img/slider5.jpg" alt="Moctezuma - Verano"></div>
+    <div><img src="img/slider2.jpg" alt="Smith - Mantenimiento"></div>
+  </div>
+</section>
+
+<footer>
+  <p>Red de Freatímetros - Carlos Casares</p>
+  <p>Proyecto educativo con tecnología de bajo costo (Arduino, sensores, GSM) para monitorear niveles de napa en zonas rurales.</p>
+  <p>&copy; 2025 - Escuela Técnica</p>
+</footer>
+
+</body>
+</html>
+
+<!-- -->

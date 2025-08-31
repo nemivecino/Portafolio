@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadret - Freatímetro Digital</title>
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="style-localidades.css">
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <h1>FREATÍMETRO DIGITAL - CADRET</h1>
+    </div>
+  </header>
+
+  <main>
+    <div class="tarjetas">
+      <div class="tarjeta" data-mes="reciente">
+        <h3>Mediciones recientes</h3>
+        <ul>
+          <li><strong>Temperatura:</strong> <span id="tempActual">Cargando...</span></li>
+          <li><strong>Humedad:</strong> <span id="humActual">Cargando...</span></li>
+          <li><strong>Temp. suelo:</strong> <span id="sueloActual">Cargando...</span></li>
+          <li><strong>Napa:</strong> <span id="napaActual">Cargando...</span></li>
+        </ul>
+
+        <button onclick="toggleTabla(this)">Más información</button>
+
+        <div class="tabla-oculta" style="display:none;">
+          <table>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Temperatura</th>
+                <th>Humedad</th>
+                <th>Temp. suelo</th>
+                <th>Napa</th>
+              </tr>
+            </thead>
+            <tbody id="tablaDatos-reciente">
+              <!-- Datos se insertan con JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="volver">
+      <a href="freatimetro.html">← Volver al inicio</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>Lecturas en tiempo real de temperatura, humedad, temperatura de suelo y napa publicadas vía ThingSpeak.</p>
+  </footer>
+
+<script>
+  // ✅ Valores fijos
+  const TEMP_SUELO_FIJA = 22;   // ejemplo en °C
+  const NAPA_FIJA = 1.5;        // metros
+
+  // ✅ Cargar última lectura (solo temp y humedad de ThingSpeak)
+  fetch('https://api.thingspeak.com/channels/2997546/feeds/last.json')
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("tempActual").textContent  = `${data.field1 || "-"} °C`;
+      document.getElementById("humActual").textContent   = `${data.field2 || "-"} %`;
+      document.getElementById("sueloActual").textContent = `${TEMP_SUELO_FIJA} °C`;
+      document.getElementById("napaActual").textContent  = `${NAPA_FIJA} m`;
+    })
+    .catch(err => {
+      console.error("Error al cargar última lectura:", err);
+    });
+
+  // ✅ Expandir tabla con historial
+  function toggleTabla(btn) {
+    const tarjeta = btn.closest(".tarjeta");
+    const tabla = tarjeta.querySelector(".tabla-oculta");
+    const tbody = document.getElementById("tablaDatos-reciente");
+
+    if (tabla.style.display === "none") {
+      tabla.style.display = "block";
+      tarjeta.classList.add("ampliada");
+      btn.textContent = "Menos información";
+
+      if (tbody.children.length === 0) {
+        fetch('https://api.thingspeak.com/channels/2997546/feeds.json?results=5')
+          .then(res => res.json())
+          .then(json => {
+            json.feeds.forEach(feed => {
+              const fechaHoraUTC = new Date(feed.created_at);
+
+              // ✅ Conversión directa a hora local Argentina
+              const fecha = fechaHoraUTC.toLocaleDateString("es-AR", { 
+                timeZone: "America/Argentina/Buenos_Aires" 
+              });
+              const hora = fechaHoraUTC.toLocaleTimeString("es-AR", { 
+                timeZone: "America/Argentina/Buenos_Aires", 
+                hour: "2-digit", 
+                minute: "2-digit" 
+              });
+
+              const fila = document.createElement("tr");
+              fila.innerHTML = `
+                <td>${fecha}</td>
+                <td>${hora}</td>
+                <td>${feed.field1 || "-"} °C</td>
+                <td>${feed.field2 || "-"} %</td>
+                <td>${TEMP_SUELO_FIJA} °C</td>
+                <td>${NAPA_FIJA} m</td>
+              `;
+              tbody.appendChild(fila);
+            });
+          })
+          .catch(err => console.error("Error al cargar historial:", err));
+      }
+
+    } else {
+      tabla.style.display = "none";
+      tarjeta.classList.remove("ampliada");
+      btn.textContent = "Más información";
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mapa de la zona</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #a7d8f0, #4fc3f7, #0288d1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    #top-menu {
+      background: #01579b;
+      color: white;
+      padding: 10px 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      border-radius: 0 0 15px 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      z-index: 10000;
+      user-select: none;
+      box-sizing: border-box;
+      justify-content: space-between; /* Para separar los elementos */
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    #reseñas-toggle {
+      cursor: pointer;
+    }
+
+    #top-menu a.btn-principal {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 6px 12px;
+      border: 1px solid white;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    #top-menu a.btn-principal:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    #reseña-box {
+      position: fixed;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 600px;
+      background-color: #ffffff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      z-index: 10001;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    #reseña-box textarea {
+      width: 100%;
+      height: 100px;
+      font-size: 16px;
+      padding: 10px;
+      resize: none;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    #reseña-box button {
+      align-self: flex-end;
+      padding: 8px 16px;
+      background-color: #0288d1;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    #reseña-box button:hover {
+      background-color: #01579b;
+    }
+
+    #container {
+      display: flex;
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 1100px;
+      padding: 20px;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: stretch;
+      height: calc(100vh - 70px);
+      box-sizing: border-box;
+      margin-top: 70px;
+    }
+
+    #mapa-container {
+      flex: 2 1 600px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      background-color: #2e7d32;
+      padding: 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 100%;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+    }
+
+    #menu {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      background-color: transparent;
+      padding: 0;
+      margin: 0;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      background-color: #ffffff;
+      color: #0288d1;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      font-weight: 600;
+    }
+
+    button:hover {
+      background-color: #b3e5fc;
+      color: #01579b;
+    }
+
+    #info {
+      flex: 1 1 300px;
+      color: #01579b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1.1rem;
+      line-height: 1.4;
+      height: 100%;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 10px;
+    }
+
+    #info .recuadro-gris {
+      background-color: #e0e0e0;
+      padding: 20px;
+      border-radius: 10px;
+      width: 100%;
+      flex-grow: 1;
+      box-sizing: border-box;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 20px;
+      margin: 0;
+      height: 100%;
+    }
+
+    #info p {
+      margin: 0;
+    }
+
+    #info img {
+      max-width: 200px;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    #info img:last-child {
+      max-width: 90%;
+      border-radius: 20px;
+    }
+
+    .form-localidad {
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 10px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .form-localidad input {
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .form-localidad button {
+      align-self: flex-start;
+    }
+
+    @media (max-width: 768px) {
+      #container {
+        flex-direction: column;
+        height: auto;
+      }
+      #mapa-container, #info {
+        width: 100%;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="top-menu">
+    <span id="reseñas-toggle">Reseñas ▼</span>
+    <a href="freatimetro.html" class="btn-principal">Ir a la Página Principal</a>
+  </div>
+
+  <div id="reseña-box">
+    <textarea placeholder="Escribí tu reseña..." id="textarea-reseña"></textarea>
+    <button onclick="enviarReseña()">Enviar</button>
+  </div>
+
+  <div id="container">
+    <div id="mapa-container">
+      <iframe id="mapa" src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d32714.152096493947!2d-61.4424534577433!3d-35.78548948403008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x95bcc8dbed631f6b%3A0x9cf1e60a0e7cc66a!2sCarlos%20Casares!3m2!1d-35.6235!2d-61.3671!4m5!1s0x95bcc4859d204f15%3A0x8a73978101a9c944!2sCadret!3m2!1d-35.77488!2d-61.62602!5e0!3m2!1ses-419!2sar!4v1710000000006" allowfullscreen loading="lazy"></iframe>
+
+      <div id="menu">
+        <button onclick="mostrarFormulario('cadret')">Cadret</button>
+        <button onclick="mostrarFormulario('bellocq')">Bellocq</button>
+        <button onclick="mostrarFormulario('moctezuma')">Moctezuma</button>
+        <button onclick="mostrarFormulario('smith')">Smith</button>
+        <button onclick="mostrarFormulario('lasofia')">La Sofía</button>
+        <button onclick="mostrarFormulario('ordoqui')">Ordoqui</button>
+      </div>
+
+      <div id="formulario-localidad" class="form-localidad">
+        <input type="text" placeholder="Área cultivada (ha)">
+        <input type="text" placeholder="Rendimiento por hectárea (kg/ha)">
+        <input type="text" placeholder="Tasa de pérdida (%)">
+        <button>Calcular</button>
+      </div>
+    </div>
+
+    <div id="info">
+      <div class="recuadro-gris">
+        <p>Somos un grupo de estudiantes que queremos elaborar una red de freatímetros y esto es un prototipo de las ubicaciones de estos mismos.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mostrar/ocultar reseña
+    document.getElementById("reseñas-toggle").addEventListener("click", () => {
+      const box = document.getElementById("reseña-box");
+      box.style.display = box.style.display === "none" ? "flex" : "none";
+    });
+
+    function enviarReseña() {
+      const texto = document.getElementById("textarea-reseña").value;
+      if (texto.trim()) {
+        alert("Gracias por tu reseña:\n\n" + texto);
+        document.getElementById("textarea-reseña").value = "";
+        document.getElementById("reseña-box").style.display = "none";
+      } else {
+        alert("Por favor escribí algo antes de enviar.");
+      }
+    }
+
+    function mostrarFormulario(localidad) {
+      document.getElementById('formulario-localidad').style.display = 'flex';
+      cambiarRuta(localidad);
+    }
+
+    function cambiarRuta(destino) {
+      const rutas = {
+        cadret: "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d32714.152096493947!2d-61.4424534577433!3d-35.78548948403008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x95bcc8dbed631f6b%3A0x9cf1e60a0e7cc66a!2sCarlos%20Casares!3m2!1d-35.6235!2d-61.3671!4m5!1s0x95bcc4859d204f15%3A0x8a73978101a9c944!2sCadret!3m2!1d-35.77488!2d-61.62602!5e0!3m2!1ses-419!2sar!4v1710000000006",
+        bellocq: "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d36112.22885394681!2d-61.20587154614273!3d-35.716877858437135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x95bcc8dbed631f6b%3A0x9cf1e60a0e7cc66a!2sCarlos%20Casares!3m2!1d-35.6235!2d-61.3671!4m5!1s0x95bd58e52d5352d1%3A0xf8602f1a252ff711!2sBellocq!3m2!1d-35.71656!2d-61.06027!5e0!3m2!1ses-419!2sar!4v1710000000007",
+        moctezuma: "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d65691.91688757874!2d-61.57950499125941!3d-35.6508531621866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x95bcc8dbed631f6b%3A0x9cf1e60a0e7cc66a!2sCarlos%20Casares!3m2!1d-35.6235!2d-61.3671!4m5!1s0x95bcc4e6b73e4f01%3A0xa64099cfdf7ae9db!2sMoctezuma!3m2!1d-35.68928!2d-61.81068!5e0!3m2!1ses-419!2sar!4v1710000000004",
+        smith: "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d45070.20604682681!2d-61.13913934410431!3d-35.66361636979998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x95bcc8dbed631f6b%3A0x9cf1e60a0e7cc66a!2sCarlos%20Casares!3m2!1d-35.6235!2d-61.3671!4m5!1s0x95bd537eb7883df3%3A0x72741e7c47f7b1e6!2sSmith!3m2!1d-35.67825!2d-61.12449!5e0!3m2!1ses-419!2sar!4v1710000000008",
+        lasofia: "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d35926.855785456496!2d-61.4202116758777!3d-35.828268108223344!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x95bcc8dbed631f6b%3A0x9cf1e60a0e7cc66a!2sCarlos%20Casares!3m2!1d-35.6235!2d-61.3671!4m5!1s0x95bcc4c26b6202cb%3A0x8d586fe6adcf03f9!2sLa%20Sofía!3m2!1d-35.83492!2d-61.61518!5e0!3m2!1ses-419!2sar!4v1710000000009",
+        ordoqui: "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d38666.91742790336!2d-61.070277189781375!3d-35.83152591488292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x95bcc8dbed631f6b%3A0x9cf1e60a0e7cc66a!2sCarlos%20Casares!3m2!1d-35.6235!2d-61.3671!4m5!1s0x95bd51aa93acbd27%3A0x94d04b5db832123b!2sOrdoqui!3m2!1d-35.83303!2d-61.05399!5e0!3m2!1ses-419!2sar!4v1710000000010"
+      };
+      document.getElementById('mapa').src = rutas[destino];
+    }
+  </script>
+
+</body>
+</html>
